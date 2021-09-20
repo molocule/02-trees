@@ -1,6 +1,6 @@
 module Foldr where
 
-import Test.HUnit
+import Test.HUnit (Test (TestList), runTestTT, (~:), (~=?), (~?=))
 import Prelude hiding (all, filter, foldl, foldl1, last, length, map, reverse)
 
 length1 :: [a] -> Int
@@ -23,7 +23,7 @@ all1 _ [] = True
 all1 p (x : xs) = p x && all1 p xs
 
 all :: (a -> Bool) -> [a] -> Bool
-all p = undefined
+all p = foldr (\x xs -> p x && xs) True
 
 testAll :: Test
 testAll =
@@ -40,7 +40,13 @@ last1 (x : xs) = case xs of
   _ -> last1 xs
 
 last :: [a] -> Maybe a
-last = undefined
+last =
+  foldr
+    ( \x xs -> case xs of
+        Nothing -> Just x
+        _ -> xs
+    )
+    Nothing
 
 testLast :: Test
 testLast =
@@ -51,7 +57,7 @@ testLast =
       ]
 
 filter :: (a -> Bool) -> [a] -> [a]
-filter p = undefined
+filter p = foldr (\x xs -> if p x then x : xs else xs) []
 
 testFilter :: Test
 testFilter =
@@ -68,7 +74,8 @@ reverse1 l = aux l []
     aux (x : xs) = \ys -> aux xs (x : ys)
 
 reverse :: [a] -> [a]
-reverse l = undefined
+-- reverse = foldr (\x xs -> xs ++ [x]) []
+reverse l = foldr (\x f acc -> f (acc : x)) id l []
 
 testReverse :: Test
 testReverse =
