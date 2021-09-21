@@ -74,8 +74,7 @@ reverse1 l = aux l []
     aux (x : xs) = \ys -> aux xs (x : ys)
 
 reverse :: [a] -> [a]
--- reverse = foldr (\x xs -> xs ++ [x]) []
-reverse l = foldr (\x f acc -> f (acc : x)) id l []
+reverse l = foldr (\x f acc -> f (x : acc)) id l []
 
 testReverse :: Test
 testReverse =
@@ -95,7 +94,7 @@ intersperse1 a (x : xs) = case xs of
   _ -> x : a : intersperse1 a xs
 
 intersperse :: a -> [a] -> [a]
-intersperse = undefined
+intersperse a = foldr (\x acc -> if length acc == 0 then x : acc else x : a : acc) []
 
 testIntersperse :: Test
 testIntersperse =
@@ -110,7 +109,7 @@ foldl1 _ z [] = z
 foldl1 f z (x : xs) = foldl1 f (z `f` x) xs
 
 foldl :: (b -> a -> b) -> b -> [a] -> b
-foldl f z xs = undefined
+foldl f z xs = foldr (\x g a -> g (f a x)) id xs z
 
 testFoldl :: Test
 testFoldl = foldl (++) "x" ["1", "2", "3"] ~=? "x123"
