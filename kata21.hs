@@ -183,10 +183,6 @@ getAggregateMin ((i, x) : xs) = minTuple (i, x) (getAggregateMin xs)
 getMaybeAnswer :: (String, Int) -> Maybe String
 getMaybeAnswer (index, value) = if value /= -1 then Just index else Nothing
 
-{-
->
--}
-
 -- Takes Tuone line in the file, split into a list of values, into an (index, spread) tuple
 getSpreadTuple :: [String] -> (String, Int)
 getSpreadTuple (i : x : y : _) = (i, calcSpread (readInt x) (readInt y))
