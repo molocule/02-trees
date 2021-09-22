@@ -10,10 +10,14 @@ the Fall 2021 CIS 552 class.
 Questions to discuss and answer with your partner:
 
  1. Which of these answers is the most readable to you right now? Why?
+    I think C is the most readable because each function has a single purpose and fullfills
+    the purity requirement.
 
  2. The general structure of the problem is to read in data from a test file and
     then calculate with that data. In which of these versions is that
     structure the most apparent?
+    I think A adheres to the structure the most since it follows the structure of reading data
+    and then calculating is the same.
 
  3. How could each these examples be improved? Pick one (not yours) and improve it.
 
