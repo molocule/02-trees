@@ -1,9 +1,9 @@
 module Kata20 where
 
-import Data.Char as Char
-import Data.List as List
+import Data.Char as Char ()
+import Data.List as List (transpose)
 import qualified Data.Maybe as Maybe
-import Test.HUnit
+import Test.HUnit (Test (TestList), runTestTT, (@?=), (~:))
 import qualified Text.Read as Read
 
 readInt :: String -> Maybe Int
